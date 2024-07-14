@@ -10,6 +10,10 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+    - name: Access Secrets
+        run: |
+          echo "Secret Token : ${{ secrets.SECRET_KEY }}"  
+
       - name: Checkout code
         uses: actions/checkout@v2
 
