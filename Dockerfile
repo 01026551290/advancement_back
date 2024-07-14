@@ -2,9 +2,9 @@ FROM python:3.8-slim-buster
 
 WORKDIR /app
 
+# 필요한 패키지 설치
 RUN apt-get update \
-    && apt-get install -y gcc \
-    && apt-get install -y default-libmysqlclient-dev \
+    && apt-get install -y gcc pkg-config default-libmysqlclient-dev \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
