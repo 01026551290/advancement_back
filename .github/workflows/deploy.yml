@@ -27,10 +27,6 @@ jobs:
           source venv/bin/activate
           pip install -r requirements.txt
 
-      - name: Access Secrets
-        run: |
-          echo "Secret Token : ${{ secrets.SECRET_KEY }}"
-
       - name: Create .env file
         run: |
           echo "SECRET_KEY=${{ secrets.SECRET_KEY }}" >> .env
@@ -39,10 +35,6 @@ jobs:
           echo "DATABASE_PASSWORD=${{ secrets.DATABASE_PASSWORD }}" >> .env
           echo "DATABASE_HOST=${{ secrets.DATABASE_HOST }}" >> .env 
           echo "DATABASE_PORT=${{ secrets.DATABASE_PORT }}" >> .env
-
-      - name: Output .env file for debugging
-        run: |
-          cat .env
 
       - name: Run migrations
         run: |
@@ -66,6 +58,11 @@ jobs:
         run: |
           docker tag advancement_back godjinsoo0524/advancement_back:latest
           docker push godjinsoo0524/advancement_back:latest
+
+      - name: Setup SSH
+        uses: webfactory/ssh-agent@v0.5.3
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
 
       - name: Deploy to server
         run: |
