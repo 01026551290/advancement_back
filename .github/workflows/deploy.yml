@@ -8,6 +8,7 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    environment: SECRET_KEY
 
     steps:
       - name: Checkout code
@@ -74,4 +75,3 @@ jobs:
           docker rm advancement_back_container || true
           docker run -d --name advancement_back_container --env-file .env -p 8000:8000 godjinsoo0524/advancement_back:latest
           EOF
-        environment: SECRET_KEY
