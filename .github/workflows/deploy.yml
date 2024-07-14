@@ -69,7 +69,7 @@ jobs:
 
       - name: Deploy to server
         run: |
-          ssh ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_IP }} << 'EOF'
+          ssh -o StrictHostKeyChecking=no ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_IP }} << 'EOF'
           docker pull godjinsoo0524/advancement_back:latest
           docker stop advancement_back_container || true
           docker rm advancement_back_container || true
