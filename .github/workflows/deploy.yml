@@ -10,10 +10,6 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Access Secrets
-        run: |
-          echo "Secret Token : ${{ secrets.SECRET_KEY }}"  
-
       - name: Checkout code
         uses: actions/checkout@v2
 
@@ -29,6 +25,10 @@ jobs:
           python -m venv venv
           source venv/bin/activate
           pip install -r requirements.txt
+
+      - name: Access Secrets
+        run: |
+          echo "Secret Token : ${{ secrets.SECRET_KEY }}"
 
       - name: Create .env file
         run: |
